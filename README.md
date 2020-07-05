@@ -1,1 +1,1 @@
-Simply react application. Still working on it..
+Simple react application. Still working on it..
