@@ -5,7 +5,7 @@ function SavedOptions(props) {
     return (
         <button
             type="button"
-            className="list-group-item list-group-item-action m-2"
+            className="list-group-item list-group-item-action"
             id={props.id}
             onClick={props.handleClick}
             onContextMenu={props.handleContextClick}

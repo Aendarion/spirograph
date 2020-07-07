@@ -104,7 +104,7 @@ function Spirograph() {
                     />
                 </div>
                 <div className="col-sm">
-                    <div>
+                    <div className="list-group">
                         <MyInput
                             max={180}
                             text="First circle radius"
@@ -126,6 +126,8 @@ function Spirograph() {
                             handleChange={handleChangeDistance}
                             disabled={!(isPaused && isStopped)}
                         />
+                    </div>
+                    <div className="mt-2 mb-2">
                         <MyButton
                             text={isStopped ? 'Start' : 'Stop'}
                             myClasses={'col'}
