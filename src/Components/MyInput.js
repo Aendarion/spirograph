@@ -10,10 +10,10 @@ function MyInput(props) {
                 {props.text}: {props.value}
             </span>
             <input
-                min={0}
+                min={1}
                 max={props.max}
                 type="range"
-                class={"form-control-range"}
+                className={"form-control-range"}
                 step="1"
                 value={props.value}
                 onChange={props.handleChange}
