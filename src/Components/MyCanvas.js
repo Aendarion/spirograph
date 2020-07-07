@@ -55,7 +55,7 @@ function MyCanvas(props) {
     useEffect(() => {
         if (props.isPaused) {
             clearTimeout(myContainer.current.drawTimer)
-        } else if (!props.isStopped) {
+        } else if (!props.isStopped) { //if not paused and not stopped
             drawCanvas(myContainer.current.myCanvas.offsetWidth)
         }
     }, [props.isPaused, props.isStopped])
