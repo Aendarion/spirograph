@@ -9,6 +9,7 @@ function MyButton(props) {
         <button
             className={buttonClasses}
             onClick={props.handleClick}
+            id={props.id}
         >
             {props.text}
         </button>

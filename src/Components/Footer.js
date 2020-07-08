@@ -5,7 +5,7 @@ function Footer() {
         <div className="col align-self-end">
             <footer className="footer">
                 <div className="text-center py-3"> By
-                    <a href="https://github.com/Aendarion"> Aendarion </a>
+                    <a target="_blank" href="https://github.com/Aendarion"> Aendarion </a>
                 </div>
             </footer>
         </div>

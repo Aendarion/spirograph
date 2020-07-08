@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import MyCanvas from "./MyCanvas";
-import MyButton from "./MyButton";
-import MyInput from "./MyInput";
 import SavedOptions from "./SavedOptions";
+import OptionInputs from "./OptionInputs";
+import ControlButtons from "./ControlButtons";
 
 function Spirograph() {
     const [lessCircleRadius, setLessCircleRadius] = useState(109)
@@ -36,6 +36,16 @@ function Spirograph() {
         setIsPaused(!isPaused)
     }
 
+    function addErrorAnimation() {
+        function removeErrorAnimation() {
+            stopButton.classList.remove("attention")
+        }
+
+        let stopButton = document.querySelector("#stopButton")
+        stopButton.classList.add("attention")
+        setTimeout(removeErrorAnimation, 600)
+    }
+
     function addToLocalStorage() { //add current option to LS
         let newOption = {
             firstRadius : lessCircleRadius,
@@ -58,11 +68,13 @@ function Spirograph() {
         if (!spirographOptions) return null // nothing saved = nothing shown
         let i = 0
         return spirographOptions.map((key) => {
-            function useSavedOption(event) {
+            function useSavedOption() {
                 if (isStopped) {
                     setLessCircleRadius(key.firstRadius)
                     setBiggerCircleRadius(key.secondRadius)
                     setDistance(key.distance)
+                } else {
+                    addErrorAnimation()
                 }
             }
             function deleteSavedOption(event) {
@@ -84,8 +96,10 @@ function Spirograph() {
                     r2={key.secondRadius}
                     d={key.distance}
                     myClass="listedItem"
-                    handleClick={useSavedOption}
-                    handleContextClick={deleteSavedOption}
+                    handleClick={useSavedOption} //use saved on left click
+                    handleContextClick={deleteSavedOption}//delete saved on right click
+                    isStopped={isStopped}
+                    title={"Left click to use option, right click to remove option"}
                 />
             )
         })
@@ -104,55 +118,28 @@ function Spirograph() {
                     />
                 </div>
                 <div className="col-sm">
-                    <div className="list-group">
-                        <MyInput
-                            max={180}
-                            text="First circle radius"
-                            value={lessCircleRadius}
-                            handleChange={handleChangeLessCircle}
-                            disabled={!(isPaused && isStopped)}
-                        />
-                        <MyInput
-                            max={200}
-                            text="Second circle radius"
-                            value={biggerCircleRadius}
-                            handleChange={handleChangeBiggerCircle}
-                            disabled={!(isPaused && isStopped)}
-                        />
-                        <MyInput
-                            max={180}
-                            text="Distance"
-                            value={distance}
-                            handleChange={handleChangeDistance}
-                            disabled={!(isPaused && isStopped)}
-                        />
-                    </div>
-                    <div className="mt-2 mb-2">
-                        <MyButton
-                            text={isStopped ? 'Start' : 'Stop'}
-                            myClasses={'col'}
-                            handleClick={handleClickStopButton}
-                        >
-                        </MyButton>
-                        <MyButton
-                            text={isPaused ? 'Resume' : 'Pause'}
-                            myClasses={'col'}
-                            handleClick={handleClickPauseButton}
-                            disabled={isStopped} //dont active if drawing stopped
-                        >
-                        </MyButton>
-                        <MyButton
-                            text={'Save'}
-                            myClasses={'col'}
-                            handleClick={addToLocalStorage}
-                        >
-                        </MyButton>
-                    </div>
-                    <div className="list-group">
+                    <OptionInputs
+                        isPaused={isPaused}
+                        isStopped={isStopped}
+                        less={lessCircleRadius}
+                        handleLess={handleChangeLessCircle}
+                        bigger={biggerCircleRadius}
+                        handleBigger={handleChangeBiggerCircle}
+                        distance={distance}
+                        handleDistance={handleChangeDistance}
+                        errorAnimation={addErrorAnimation}
+                    />
+                    <ControlButtons
+                        isPaused={isPaused}
+                        isStopped={isStopped}
+                        handleStop={handleClickStopButton}
+                        handlePause={handleClickPauseButton}
+                        handleSave={addToLocalStorage}
+                    />
+                    <div className="list-group saved-options">
                         {getListFromLS()}
                     </div>
                 </div>
-
             </div>
         </div>
     );

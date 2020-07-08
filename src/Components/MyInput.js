@@ -1,9 +1,13 @@
 import React from 'react';
 
 function MyInput(props) {
-
+    let myClasses = props.isStopped ? "" : "non-active "
+    myClasses +="list-group-item"
     return (
-        <div className="list-group-item">
+        <div
+            className={myClasses}
+            onClick={props.errorAnimation}
+        >
             <span
                 className="open-sans"
             >
@@ -11,7 +15,7 @@ function MyInput(props) {
             </span>
             <input
                 min={1}
-                max={props.max}
+                max={200}
                 type="range"
                 className="form-control-range"
                 step="1"
