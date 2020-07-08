@@ -4,7 +4,7 @@ body {
 
 canvas {
     background: #fff;
-    border: 0px solid #f3f3f3;
+    border: 0 solid #f3f3f3;
     -moz-box-shadow: 0 2px 3px rgba(0,0,0,0.1);
     -webkit-box-shadow: 0 2px 3px rgba(0,0,0,0.1);
     box-shadow: 0 2px 3px rgba(0,0,0,0.1);
@@ -22,9 +22,31 @@ canvas {
     margin-left: 10vw;
     color: gray;
     font-weight: 400;
-    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
-    0px 8px 13px rgba(0,0,0,0.1),
-    0px 18px 23px rgba(0,0,0,0.1);
+    text-shadow: 0 4px 3px rgba(0,0,0,0.4),
+    0 8px 13px rgba(0,0,0,0.1),
+    0 18px 23px rgba(0,0,0,0.1);
+}
+
+.attention {
+    animation: .6s ease-in-out 0s normal none infinite running error-animation;
+    background-color: red !important;
+}
+@keyframes error-animation {
+    0%, 50%, 100% {
+        transform: rotate(0deg);
+    }
+    10%, 30% {
+        transform: rotate(-2deg);
+    }
+    20%, 40% {
+        transform: rotate(2deg);
+    }
+}
+
+.non-active {
+    background-color: #E9E9E9;
+    cursor: default !important;
+    color: gray;
 }
 
 .bottom-shadow {
